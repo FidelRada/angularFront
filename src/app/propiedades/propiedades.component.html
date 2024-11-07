@@ -1,0 +1,14 @@
+<div *ngIf="datos.length > 0">
+    <div *ngIf="error">
+        <p>Error: {{ error }}</p>
+    </div>
+    <ul>
+        <li *ngFor="let dato of datos">
+        {{ dato.zona }} - {{ dato.ciudad }}: {{ dato.precioPromedioPorM2 | currency }}
+        </li>
+    </ul>
+</div>
+<div *ngIf="datos.length === 0">
+    <p>No se encontraron datos.</p>
+</div>
+  

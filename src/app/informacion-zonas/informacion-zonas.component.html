@@ -1,0 +1,20 @@
+<p>informacion-zonas works!</p>
+<label for="zone">Seleccionar Zona:</label>
+<select id="zone" [(ngModel)]="zonaSeleccionada" (change)="onSelectZona()">
+    <!-- Se iteran las zonas obtenidas de la API -->
+    <option *ngFor="let zone of zonas" [value]="zone">{{ zone }}</option>
+  </select>
+
+  <div *ngIf="precioM2">
+    <h3>Precio Promedio por m2:</h3>
+    <p>Precio Promedio: {{ precioM2?.precioPromedioPorM2 | number:'1.2-2' }}</p>
+  </div>
+  
+  <div *ngIf="promedioTiempoMercado">
+    <h3>Promedio Tiempo en Mercado:</h3>
+    <p>Promedio Días en Venta: {{ promedioTiempoMercado?.promedioDiasEnVenta }}</p>
+  </div>
+  <!-- informacion-zonas.component.html -->
+<h3>Distribución de Propiedades por Estado</h3>
+<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+  
