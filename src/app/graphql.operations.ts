@@ -63,4 +63,64 @@ const GET_PROMEDIO_TIEMPO_POR_ZONA = gql`
   }
 `
 
-export { GET_PROPIEDADES_CIUDAD_ZONA, GET_TIEMPO_VENTAS_CIUDAD, GET_TASA_CONVERSION_CIUDAD, GET_ZONAS, GET_VENDIDOS_POR_ZONA, GET_PRECIO_M2_POR_ZONA, GET_PROMEDIO_TIEMPO_POR_ZONA };
+const GET_VENTAS = gql`
+  query GetSalesSummary {
+    salesSummary {
+      monthlyData {
+        fecha
+        valor
+      }
+      yearlyData {
+        fecha
+        valor
+      }
+    }
+  }
+`
+
+const CREATE_PROPIEDAD = gql`
+  query GetSalesSummary {
+    salesSummary {
+      monthlyData {
+        fecha
+        valor
+      }
+      yearlyData {
+        fecha
+        valor
+      }
+    }
+  }
+`
+
+const ADD_DATE_SOLD = gql`
+  query GetSalesSummary {
+    salesSummary {
+      monthlyData {
+        fecha
+        valor
+      }
+      yearlyData {
+        fecha
+        valor
+      }
+    }
+  }
+`
+
+const ADD_VIEW = gql`
+  query GetSalesSummary {
+    salesSummary {
+      monthlyData {
+        fecha
+        valor
+      }
+      yearlyData {
+        fecha
+        valor
+      }
+    }
+  }
+`
+
+export { GET_PROPIEDADES_CIUDAD_ZONA, GET_TIEMPO_VENTAS_CIUDAD, GET_TASA_CONVERSION_CIUDAD, GET_ZONAS, GET_VENDIDOS_POR_ZONA, GET_PRECIO_M2_POR_ZONA, GET_PROMEDIO_TIEMPO_POR_ZONA, GET_VENTAS };

@@ -116,18 +116,16 @@ export class InformacionZonasComponent implements OnInit {
       packages: ['corechart', 'charteditor']
     });
     google.charts.setOnLoadCallback(() => {
-      const container = document.getElementById('piechart_3d');
+      const container = document.getElementById('piechart');
   
       // Verificar si el contenedor existe
       if (container) {
         const data = google.visualization.arrayToDataTable(this.chartData);
         const options = {
           title: 'Distribución de Propiedades por Estado',
-          is3D: true,
-          slices: {
-            0: { offset: 0.1 },
-            1: { offset: 0.1 }
-          }
+          is3D: false,
+          pieSliceText: 'percentage', // Muestra el porcentaje en cada segmento
+          legend: { position: 'right' as 'right' },
         };
         const chart = new google.visualization.PieChart(container);
         chart.draw(data, options);
