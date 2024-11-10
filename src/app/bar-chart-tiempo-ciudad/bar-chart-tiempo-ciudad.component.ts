@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 declare var google: any;
 import { Apollo } from 'apollo-angular';
-import { GET_TIEMPO_VENTAS_CIUDAD } from '../graphql.operations';
+import { GET_TIEMPO_VENTAS_LOCALIDAD } from '../graphql.operations';
 
 @Component({
   selector: 'app-bar-chart-tiempo-ciudad',
@@ -11,7 +11,7 @@ import { GET_TIEMPO_VENTAS_CIUDAD } from '../graphql.operations';
   styleUrl: './bar-chart-tiempo-ciudad.component.css'
 })
 export class BarChartTiempoCiudadComponent implements OnInit {
-  datos: { ciudad: string, promedioDiasEnVenta: number }[] = [];
+  datos: { localidad: string, promedioDiasEnVenta: number }[] = [];
   error: any;
 
   constructor(private apollo: Apollo) { }
@@ -23,9 +23,9 @@ export class BarChartTiempoCiudadComponent implements OnInit {
 
     // Cargar datos desde la API Django
     this.apollo.watchQuery<any>({
-      query: GET_TIEMPO_VENTAS_CIUDAD
+      query: GET_TIEMPO_VENTAS_LOCALIDAD
     }).valueChanges.subscribe(({ data, error }) => {
-      this.datos = data.calcularPromedioTiempoMercadoPorCiudad;
+      this.datos = data.calcularPromedioTiempoMercadoPorLocalidad;
       this.error = error;
       console.log(this.datos)
 
@@ -47,7 +47,7 @@ export class BarChartTiempoCiudadComponent implements OnInit {
     const chartData: (string | number)[][] = [['Ciudad', 'Tiempo de Ventas Promedio']];
     this.datos.forEach(dato => {
       // Añadir ciudad (como string) y precio (como número)
-      chartData.push([dato.ciudad, dato.promedioDiasEnVenta]);
+      chartData.push([dato.localidad, dato.promedioDiasEnVenta]);
     });
 
     const data = google.visualization.arrayToDataTable(chartData);
@@ -55,7 +55,7 @@ export class BarChartTiempoCiudadComponent implements OnInit {
     const options = {
       title: 'Tiempo de ventas promedio en cada ciudad',
       hAxis: { title: 'Ciudades' },
-      vAxis: { title: 'Tiempo venta promedio' },
+      vAxis: { title: 'Tiempo venta promedio', format: '#,##0.00' },
       bar: { groupWidth: '70%' },
       legend: { position: 'none' },
     };

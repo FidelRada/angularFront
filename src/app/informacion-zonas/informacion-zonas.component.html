@@ -1,10 +1,10 @@
-<label for="zone">Seleccionar Zona:</label>
-<select id="zone" [(ngModel)]="zonaSeleccionada" (change)="onSelectZona()">
+<label for="zona">Seleccionar Zona:</label>
+<select id="zona" [(ngModel)]="zonaSeleccionada" (change)="onSelectZona()">
   <!-- Se iteran las zonas obtenidas de la API -->
-  <option *ngFor="let zone of zonas" [value]="zone">{{ zone }}</option>
+  <option *ngFor="let zona of zonas" [value]="zona">{{ zona }}</option>
 </select>
 
-<div id="avg-zone">
+<div id="avg-zona">
   <div *ngIf="precioM2" id="precio-m2">
     <h3>Precio Promedio por m2:</h3>
     <p>{{ precioM2?.precioPromedioPorM2 | number:'1.2-2' }}</p>

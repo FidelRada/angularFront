@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 declare var google: any;
 import { Apollo } from 'apollo-angular';
-import { GET_PROPIEDADES_CIUDAD_ZONA } from '../graphql.operations';
+import { GET_PROPIEDADES_LOCALIDAD_ZONA } from '../graphql.operations';
 
 @Component({
   selector: 'app-bar-chart-precio-m2',
@@ -11,7 +11,7 @@ import { GET_PROPIEDADES_CIUDAD_ZONA } from '../graphql.operations';
   styleUrls: ['./bar-chart-precio-m2.component.css']
 })
 export class BarChartPrecioM2Component implements OnInit {
-  datos: { ciudad: string, precioPromedioPorM2: number }[] = [];
+  datos: { localidad: string, precioPromedioPorM2: number }[] = [];
   error: any;
 
   constructor(private apollo: Apollo) { }
@@ -23,9 +23,9 @@ export class BarChartPrecioM2Component implements OnInit {
 
     // Cargar datos desde la API Django
     this.apollo.watchQuery<any>({
-      query: GET_PROPIEDADES_CIUDAD_ZONA
+      query: GET_PROPIEDADES_LOCALIDAD_ZONA
     }).valueChanges.subscribe(({ data, error }) => {
-      this.datos = data.calcularPrecioPromedioPorCiudad;
+      this.datos = data.calcularPrecioPromedioPorLocalidad;
       this.error = error;
       console.log(this.datos)
 
@@ -47,15 +47,15 @@ export class BarChartPrecioM2Component implements OnInit {
     const chartData: (string | number)[][] = [['Ciudad', 'Precio por m²']];
     this.datos.forEach(dato => {
       // Añadir ciudad (como string) y precio (como número)
-      chartData.push([dato.ciudad, dato.precioPromedioPorM2]);
+      chartData.push([dato.localidad, dato.precioPromedioPorM2]);
     });
 
     const data = google.visualization.arrayToDataTable(chartData);
 
     const options = {
       title: 'Precio promedio por m² en cada ciudad',
-      hAxis: { title: 'Ciudades' },
-      vAxis: { title: 'Precio por m²' },
+      hAxis: { title: 'Precio por m²', format: '#,##0.00' },
+      vAxis: { title: 'Ciudades' },
       bar: { groupWidth: '70%' },
       legend: { position: 'none' },
     };

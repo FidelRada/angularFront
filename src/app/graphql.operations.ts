@@ -1,28 +1,28 @@
 import { gql } from "apollo-angular";
 
-const GET_PROPIEDADES_CIUDAD_ZONA = gql`
+const GET_PROPIEDADES_LOCALIDAD_ZONA = gql`
   query MyQuery {
-    calcularPrecioPromedioPorCiudad {
-      precioPromedioPorM2
-      ciudad
-    }
+    calcularPrecioPromedioPorLocalidad {
+    localidad
+    precioPromedioPorM2
+  }
   }
 `
 
-const GET_TIEMPO_VENTAS_CIUDAD = gql`
+const GET_TIEMPO_VENTAS_LOCALIDAD = gql`
   query MyQuery {
-    calcularPromedioTiempoMercadoPorCiudad {
-      ciudad
+    calcularPromedioTiempoMercadoPorLocalidad {
+      localidad
       promedioDiasEnVenta
     }
   }
 `
 
-const GET_TASA_CONVERSION_CIUDAD = gql`
+const GET_TASA_CONVERSION_LOCALIDAD = gql`
   query MyQuery {
-    calcularTasaConversionPorCiudad {
+    calcularTasaConversionPorLocalidad {
+      localidad
       tasaConversion
-      ciudad
     }
   }
 `
@@ -30,14 +30,14 @@ const GET_TASA_CONVERSION_CIUDAD = gql`
 const GET_ZONAS = gql`
   query MyQuery {
     obtenerZonasUnicas {
-      zone
+      zona
     }
   }
 `
 
 const GET_VENDIDOS_POR_ZONA = gql`
-  query MyQuery($zone: String!) {
-    propiedadesVendidasPorZona(zone: $zone) {
+  query MyQuery($zona: String!) {
+    propiedadesVendidasPorZona(zona: $zona) {
       zona
       vendidos
       noVendidos
@@ -46,8 +46,8 @@ const GET_VENDIDOS_POR_ZONA = gql`
 `
 
 const GET_PRECIO_M2_POR_ZONA = gql`
-  query MyQuery($zone: String!) {
-  precioM2PorZona(zone: $zone) {
+  query MyQuery($zona: String!) {
+  precioM2PorZona(zona: $zona) {
       zona
       precioPromedioPorM2
     }
@@ -55,8 +55,8 @@ const GET_PRECIO_M2_POR_ZONA = gql`
 `
 
 const GET_PROMEDIO_TIEMPO_POR_ZONA = gql`
-  query MyQuery($zone: String!) {
-  calcularPromedioTiempoMercadoPorZona(zone: $zone) {
+  query MyQuery($zona: String!) {
+  calcularPromedioTiempoMercadoPorZona(zona: $zona) {
       zona
       promedioDiasEnVenta
     }
@@ -79,48 +79,57 @@ const GET_VENTAS = gql`
 `
 
 const CREATE_PROPIEDAD = gql`
-  query GetSalesSummary {
-    salesSummary {
-      monthlyData {
-        fecha
+  mutation CreatePropiedad(
+    $createdAt: String,
+    $localidad: String!,
+    $metrosCuadradosConstruidos: Float!,
+    $superficie: String!,
+    $tipo: String!,
+    $valor: Float!,
+    $zona: String!
+  ) {
+    createPropiedad(
+      createdAt: $createdAt
+      localidad: $localidad
+      metrosCuadradosConstruidos: $metrosCuadradosConstruidos
+      superficie: $superficie
+      tipo: $tipo
+      valor: $valor
+      zona: $zona
+    ) {
+      propiedad {
+        createdAt
+        localidad
+        metrosCuadradosConstruidos
+        superficie
+        tipo
         valor
-      }
-      yearlyData {
-        fecha
-        valor
+        zona
       }
     }
   }
-`
+`;
 
 const ADD_DATE_SOLD = gql`
-  query GetSalesSummary {
-    salesSummary {
-      monthlyData {
-        fecha
-        valor
-      }
-      yearlyData {
-        fecha
-        valor
+  mutation UpdateDateSold($id: ID!, $fechaDeVenta: String!) {
+    updateDateSold(id: $id, fechaDeVenta: $fechaDeVenta) {
+      propiedad {
+        id
+        fechaDeVenta
       }
     }
   }
 `
 
 const ADD_VIEW = gql`
-  query GetSalesSummary {
-    salesSummary {
-      monthlyData {
-        fecha
-        valor
-      }
-      yearlyData {
-        fecha
-        valor
+  mutation IncrementVisitas($id: ID!) {
+    incrementVisitas(id: $id) {
+      propiedad {
+        id
+        visitas
       }
     }
   }
 `
 
-export { GET_PROPIEDADES_CIUDAD_ZONA, GET_TIEMPO_VENTAS_CIUDAD, GET_TASA_CONVERSION_CIUDAD, GET_ZONAS, GET_VENDIDOS_POR_ZONA, GET_PRECIO_M2_POR_ZONA, GET_PROMEDIO_TIEMPO_POR_ZONA, GET_VENTAS };
+export { GET_PROPIEDADES_LOCALIDAD_ZONA, GET_TIEMPO_VENTAS_LOCALIDAD, GET_TASA_CONVERSION_LOCALIDAD, GET_ZONAS, GET_VENDIDOS_POR_ZONA, GET_PRECIO_M2_POR_ZONA, GET_PROMEDIO_TIEMPO_POR_ZONA, GET_VENTAS, CREATE_PROPIEDAD, ADD_DATE_SOLD, ADD_VIEW };

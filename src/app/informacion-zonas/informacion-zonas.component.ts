@@ -39,7 +39,7 @@ export class InformacionZonasComponent implements OnInit {
       
       // Extraemos solo el campo 'zone' de cada objeto
       console.log(data.obtenerZonasUnicas);
-      this.zonas = data.obtenerZonasUnicas.map((zona: { zone: string }) => zona.zone);
+      this.zonas = data.obtenerZonasUnicas.map((zona: { zona: string }) => zona.zona);
       console.log(this.zonas);  // Imprimimos las zonas en la consola para verificar
     })
   }
@@ -51,12 +51,12 @@ export class InformacionZonasComponent implements OnInit {
     }
   }
 
-  ejecutarConsultas(zone: string) {
+  ejecutarConsultas(zona: string) {
     // Ejecutar la primera consulta: GET_PRECIO_M2_POR_ZONA
     this.apollo
       .watchQuery({
         query: GET_PRECIO_M2_POR_ZONA,
-        variables: { zone },
+        variables: { zona },
       })
       .valueChanges.subscribe((result: any) => {
         if (result?.data?.precioM2PorZona && result.data.precioM2PorZona.length > 0) {
@@ -74,7 +74,7 @@ export class InformacionZonasComponent implements OnInit {
     this.apollo
       .watchQuery({
         query: GET_PROMEDIO_TIEMPO_POR_ZONA,
-        variables: { zone },
+        variables: { zona },
       })
       .valueChanges.subscribe((result: any) => {
         if (result?.data?.calcularPromedioTiempoMercadoPorZona && result.data.calcularPromedioTiempoMercadoPorZona.length > 0) {
@@ -92,7 +92,7 @@ export class InformacionZonasComponent implements OnInit {
       this.apollo
       .watchQuery({
         query: GET_VENDIDOS_POR_ZONA,
-        variables: { zone },
+        variables: { zona },
       })
       .valueChanges.subscribe((result: any) => {
       this.vendidosPorZona = result?.data?.propiedadesVendidasPorZona[0];
