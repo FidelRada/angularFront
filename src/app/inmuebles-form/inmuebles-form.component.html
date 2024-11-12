@@ -1,0 +1,73 @@
+<div class="inmueble-form-container">
+    <h2>{{ isEditMode ? 'Editar Inmueble' : 'Crear Inmueble' }}</h2>
+<form [formGroup]="inmuebleForm" (ngSubmit)="onSubmit()">
+    <!-- Dirección -->
+    <div class="p-field p-grid">
+      <label for="direccion">Dirección</label>
+      <div class="p-col-12 p-md-10">
+        <input id="direccion" formControlName="direccion" pInputText />
+      </div>
+    </div>
+  
+    <!-- Tipo -->
+    <div class="p-field p-grid">
+      <label for="tipo">Tipo</label>
+      <div class="p-col-12 p-md-10">
+        <p-dropdown 
+          formControlName="tipo"
+          [options]="tipos" 
+          placeholder="Seleccione un tipo"
+          filter="true" 
+          filterBy="label,value"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+    </div>
+  
+    <!-- Superficie -->
+    <div class="p-field p-grid">
+      <label for="superficie">Superficie (m²)</label>
+      <div class="p-col-12 p-md-10">
+        <input id="superficie" formControlName="superficie" type="number" pInputText />
+      </div>
+    </div>
+  
+    <!-- Valor -->
+    <div class="p-field p-grid">
+      <label for="valor">Valor</label>
+      <div class="p-col-12 p-md-10">
+        <input id="valor" formControlName="valor" type="number" pInputText />
+      </div>
+    </div>
+  
+    <!-- Descripción -->
+    <div class="p-field p-grid">
+      <label for="descripcion">Descripción</label>
+      <div class="p-col-12 p-md-10">
+        <textarea id="descripcion" formControlName="descripcion" pInputTextarea rows="5" cols="30"></textarea>
+      </div>
+    </div>
+  
+    <!-- Propietario -->
+    <div class="p-field p-grid">
+      <label for="propietario_id">Propietario</label>
+      <div class="p-col-12 p-md-10">
+        <p-dropdown 
+          formControlName="propietario_id"
+          [options]="propietarios" 
+          optionLabel="nombre"
+          placeholder="Seleccione un propietario"
+          filter="true" 
+          filterBy="nombre,ci"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+    </div>
+  
+    <div class="p-field p-grid">
+      <div class="p-col-12 p-md-10 p-md-offset-2">
+        <button type="submit" pButton label="Guardar" [disabled]="inmuebleForm.invalid"></button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,24 @@
+/* Alinear los labels a la izquierda y los inputs a la derecha */
+.p-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .p-field label {
+    text-align: left;
+    width: 20%; /* Ajusta según el tamaño que quieras para el label */
+    padding-right: 1rem;
+  }
+  
+  .p-field .p-col-12 {
+    width: 80%; /* Ajusta según el tamaño que quieras para los inputs */
+  }
+  
+  /* Estilo adicional para los campos de texto y dropdowns */
+  .p-dropdown, 
+  .p-inputtext, 
+  .p-inputtextarea {
+    width: 100%; /* Asegura que los inputs ocupen el espacio disponible */
+  }
+  

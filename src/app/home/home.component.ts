@@ -4,13 +4,13 @@ import { Component, OnInit } from '@angular/core';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { PropiedadesComponent } from '../propiedades/propiedades.component';
 import { BarChartPrecioM2Component } from '../bar-chart-precio-m2/bar-chart-precio-m2.component';
 import { BarChartTiempoCiudadComponent } from '../bar-chart-tiempo-ciudad/bar-chart-tiempo-ciudad.component';
 import { ColumnChartTasaConversionComponent } from '../column-chart-tasa-conversion/column-chart-tasa-conversion.component';
 import { InformacionZonasComponent } from '../informacion-zonas/informacion-zonas.component';
 import { FormsModule } from '@angular/forms';
 import { LineChartComponent } from '../line-chart/line-chart.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 
 
@@ -31,7 +31,7 @@ const GET_DATOS_QUERY = gql`
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [BarChartPrecioM2Component, BarChartTiempoCiudadComponent, ColumnChartTasaConversionComponent, InformacionZonasComponent, LineChartComponent],
+  imports: [BarChartPrecioM2Component, BarChartTiempoCiudadComponent, ColumnChartTasaConversionComponent, InformacionZonasComponent, LineChartComponent, SidebarComponent],
   styleUrl: './home.component.css',
   templateUrl: './home.component.html',
 })

@@ -1,0 +1,31 @@
+<div class="persona-form-container">
+    <h2>{{ isEditMode ? 'Editar Persona' : 'Crear Persona' }}</h2>
+<form [formGroup]="personaForm" (ngSubmit)="onSubmit()">
+    <div class="p-field">
+      <label for="nombre" class="p-col-6">Nombre</label>
+      <input id="nombre" pInputText formControlName="nombre" class="p-col-6" />
+    </div>
+  
+    <div class="p-field">
+      <label for="apellido_paterno" class="p-col-6">Apellido Paterno</label>
+      <input id="apellido_paterno" pInputText formControlName="apellido_paterno" class="p-col-6" />
+    </div>
+  
+    <div class="p-field">
+      <label for="apellido_materno" class="p-col-6">Apellido Materno</label>
+      <input id="apellido_materno" pInputText formControlName="apellido_materno" class="p-col-6" />
+    </div>
+  
+    <div class="p-field">
+      <label for="ci" class="p-col-6">CI</label>
+      <input id="ci" pInputText formControlName="ci" class="p-col-6" />
+    </div>
+  
+    <div class="p-field">
+      <label for="wallet_address_ETH" class="p-col-6">Dirección de Wallet</label>
+      <input id="wallet_address_ETH" pInputText formControlName="wallet_address_ETH" class="p-col-6" />
+    </div>
+  
+    <button pButton type="submit" label="Guardar" [disabled]="personaForm.invalid"></button>
+  </form>
+</div>

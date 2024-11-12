@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,21 +8,18 @@ import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { SidebarComponent } from './sidebar/sidebar.component';
+
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HomeComponent, HttpClientModule, ApolloModule, FormsModule],
+  imports: [HomeComponent, HttpClientModule, ApolloModule, FormsModule, RouterOutlet, SidebarComponent],
   styleUrl: './app.component.css',
-  template: `
-    <main>
-      <header class="brand-name">
-      </header>
-      <section class="content">
-        <app-home></app-home>
-      </section>
-    </main>
-  `,
+  templateUrl: 'app.component.html'
 })
 export class AppComponent {
   title = 'propiedadesbi';

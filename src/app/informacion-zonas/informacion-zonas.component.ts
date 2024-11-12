@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { GET_ZONAS, GET_PRECIO_M2_POR_ZONA, GET_VENDIDOS_POR_ZONA, GET_PROMEDIO_TIEMPO_POR_ZONA } from '../graphql.operations';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';  // Importar FormsModule
-import { NgModule } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
