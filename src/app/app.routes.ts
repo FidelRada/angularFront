@@ -8,6 +8,10 @@ import { PersonasFormComponent } from './personas-form/personas-form.component';
 import { TransaccionesComponent } from './transacciones/transacciones.component';
 import { PersonasViewComponent } from './personas-view/personas-view.component';
 import { InmueblesViewComponent } from './inmuebles-view/inmuebles-view.component';
+import { ClientesComponent } from './clientes/clientes.component'
+import { EmpleadosComponent } from './empleados/empleados.component'
+import { AdminsComponent } from './admins/admins.component'
+
 
 export const routes: Routes = [
     {
@@ -49,6 +53,21 @@ export const routes: Routes = [
         path: 'transacciones',
         component: TransaccionesComponent,
         title: 'Propiedades',
+    },
+    {
+        path: 'clientes',
+        component: ClientesComponent,
+        title: 'Clientes',
+    },
+    {
+        path: 'empleados',
+        component: EmpleadosComponent,
+        title: 'Empleados',
+    },
+    {
+        path: 'admins',
+        component: AdminsComponent,
+        title: 'Admins',
     },
     {
         path: '**',

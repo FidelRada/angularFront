@@ -1,1 +1,93 @@
-<p>inmuebles works!</p>
+<div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="inmuebles.length > 0">
+    <p-table [value]="inmuebles" class="inmuebles-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Inmueble ID</th>
+          <th>Dirección</th>
+          <th>Superficie (m²)</th>
+          <th>Tipo</th>
+          <th>Valor</th>
+          <th>Propietario</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-inmueble>
+        <tr>
+          <td>{{ inmueble.id }}</td>
+          <td>{{ inmueble.direccion }}</td>
+          <td>{{ inmueble.superficie }}</td>
+          <td>{{ inmueble.tipo }}</td>
+          <td>{{ inmueble.valor | currency }}</td>
+  
+          <!-- Datos del objeto Persona -->
+          <td *ngIf="inmueble.persona">
+            {{ inmueble.persona.nombre }} {{ inmueble.persona.apellidoPaterno }} {{ inmueble.persona.apellidoMaterno }}
+          </td>
+          <td *ngIf="!inmueble.persona">Sin propietario</td>
+  
+          <!-- Botón de Detalles en la última columna -->
+          <td>
+            <button pButton type="button" label="Detalles" icon="pi pi-info-circle" severity="info" (click)="verDetalles(inmueble)"></button>
+            
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  
+  <!-- Modal para ver detalles del inmueble -->
+  <p-dialog header="Detalles del Inmueble" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" (onHide)="selectedInmueble = null">
+    <div *ngIf="selectedInmueble">
+      <p><strong>ID:</strong> {{ selectedInmueble.id }}</p>
+      <p><strong>Dirección:</strong> {{ selectedInmueble.direccion }}</p>
+      <p><strong>Descripción:</strong> {{ selectedInmueble.descripcion }}</p>
+      <p><strong>Superficie:</strong> {{ selectedInmueble.superficie }} m²</p>
+      <p><strong>Tipo:</strong> {{ selectedInmueble.tipo }}</p>
+      <p><strong>Valor:</strong> {{ selectedInmueble.valor | currency }}</p>
+  
+      <h3>Propietario</h3>
+      <p *ngIf="selectedInmueble.persona">
+        {{ selectedInmueble.persona.nombre }} {{ selectedInmueble.persona.apellidoPaterno }} {{ selectedInmueble.persona.apellidoMaterno }}<br />
+        CI: {{ selectedInmueble.persona.ci }}
+      </p>
+    </div>
+  </p-dialog>
+
+   <!-- Modal para editar inmueble -->
+  <p-dialog header="Editar Inmueble" [(visible)]="displayEditModal" [modal]="true" [style]="{width: '50vw'}" (onHide)="selectedInmueble = null">
+    <div *ngIf="selectedInmueble">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="direccion">Dirección</label>
+          <input id="direccion" type="text" pInputText [(ngModel)]="selectedInmueble.direccion" />
+        </div>
+        <div class="p-field">
+          <label for="superficie">Superficie (m²)</label>
+          <input id="superficie" type="number" pInputText [(ngModel)]="selectedInmueble.superficie" />
+        </div>
+        <div class="p-field">
+          <label for="tipo">Tipo</label>
+          <input id="tipo" type="text" pInputText [(ngModel)]="selectedInmueble.tipo" />
+        </div>
+        <div class="p-field">
+          <label for="valor">Valor</label>
+          <input id="valor" type="number" pInputText [(ngModel)]="selectedInmueble.valor" />
+        </div>
+      </div>
+  
+      <p-footer>
+        <button pButton type="button" label="Guardar" icon="pi pi-check" (click)="guardarCambios()"></button>
+        <button pButton type="button" label="Cancelar" icon="pi pi-times" (click)="displayEditModal = false"></button>
+      </p-footer>
+    </div>
+  </p-dialog>
+  
+  <!-- Mensaje si no hay inmuebles disponibles -->
+  <div *ngIf="inmuebles.length === 0 && !errorMessage">
+    No hay inmuebles disponibles.
+  </div>
+  

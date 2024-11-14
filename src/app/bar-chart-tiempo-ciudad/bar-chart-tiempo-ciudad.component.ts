@@ -22,7 +22,7 @@ export class BarChartTiempoCiudadComponent implements OnInit {
     google.charts.setOnLoadCallback(() => this.drawChart());
 
     // Cargar datos desde la API Django
-    this.apollo.watchQuery<any>({
+    this.apollo.use('api2').watchQuery<any>({
       query: GET_TIEMPO_VENTAS_LOCALIDAD
     }).valueChanges.subscribe(({ data, error }) => {
       this.datos = data.calcularPromedioTiempoMercadoPorLocalidad;

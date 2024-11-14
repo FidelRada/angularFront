@@ -23,7 +23,7 @@ export class LineChartComponent implements OnInit {
 
   fetchData(): void {
     // Ejecuta la consulta directamente con Apollo
-    this.apollo
+    this.apollo.use('api2')
       .watchQuery<any>({
         query: GET_VENTAS,
       })

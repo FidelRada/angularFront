@@ -1,1 +1,87 @@
-<p>personas works!</p>
+
+<div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="personas.length > 0">
+    <p-table [value]="personas" class="personas-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Persona ID</th>
+          <th>Nombre</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>CI</th>
+          <th>Wallet ETH</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-persona>
+        <tr>
+          <td>{{ persona.id }}</td>
+          <td>{{ persona.nombre }}</td>
+          <td>{{ persona.apellidoPaterno }}</td>
+          <td>{{ persona.apellidoMaterno }}</td>
+          <td>{{ persona.ci }}</td>
+          <td>{{ persona.wallet_address_ETH || 'No disponible' }}</td>
+          
+          <td>
+            <button pButton type="button" label="Detalles" icon="pi pi-info-circle" severity="info" (click)="verDetalles(persona)"></button>
+            <button pButton type="button" label="Editar" icon="pi pi-pencil" severity="warning" (click)="editarPersona(persona)"></button>
+            <button pButton type="button" label="Eliminar" icon="pi pi-trash" severity="danger" (click)="eliminarPersona(persona)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  
+  <!-- Modal para ver detalles de la persona -->
+  <p-dialog header="Detalles de la Persona" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" (onHide)="selectedPersona = null">
+    <div *ngIf="selectedPersona">
+      <p><strong>ID:</strong> {{ selectedPersona.id }}</p>
+      <p><strong>Nombre:</strong> {{ selectedPersona.nombre }}</p>
+      <p><strong>Apellido Paterno:</strong> {{ selectedPersona.apellidoPaterno }}</p>
+      <p><strong>Apellido Materno:</strong> {{ selectedPersona.apellidoMaterno }}</p>
+      <p><strong>CI:</strong> {{ selectedPersona.ci }}</p>
+      <p><strong>Wallet ETH:</strong> {{ selectedPersona.wallet_address_ETH || 'No disponible' }}</p>
+    </div>
+  </p-dialog>
+  
+  <!-- Modal para editar persona -->
+  <p-dialog header="Editar Persona" [(visible)]="displayEditModal" [modal]="true" [style]="{width: '50vw'}" (onHide)="selectedPersona = null">
+    <div *ngIf="selectedPersona">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" type="text" pInputText [(ngModel)]="selectedPersona.nombre" />
+        </div>
+        <div class="p-field">
+          <label for="apellidoPaterno">Apellido Paterno</label>
+          <input id="apellidoPaterno" type="text" pInputText [(ngModel)]="selectedPersona.apellidoPaterno" />
+        </div>
+        <div class="p-field">
+          <label for="apellidoMaterno">Apellido Materno</label>
+          <input id="apellidoMaterno" type="text" pInputText [(ngModel)]="selectedPersona.apellidoMaterno" />
+        </div>
+        <div class="p-field">
+          <label for="ci">CI</label>
+          <input id="ci" type="text" pInputText [(ngModel)]="selectedPersona.ci" />
+        </div>
+        <div class="p-field">
+          <label for="wallet_address_ETH">Wallet ETH</label>
+          <input id="wallet_address_ETH" type="text" pInputText [(ngModel)]="selectedPersona.wallet_address_ETH" />
+        </div>
+      </div>
+  
+      <p-footer>
+        <button pButton type="button" label="Guardar" icon="pi pi-check" (click)="guardarCambios()"></button>
+        <button pButton type="button" label="Cancelar" icon="pi pi-times" (click)="displayEditModal = false"></button>
+      </p-footer>
+    </div>
+  </p-dialog>
+  
+  <!-- Mensaje si no hay personas disponibles -->
+  <div *ngIf="personas.length === 0 && !errorMessage">
+    No hay personas disponibles.
+  </div>
+  

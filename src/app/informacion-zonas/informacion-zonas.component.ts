@@ -26,7 +26,7 @@ export class InformacionZonasComponent implements OnInit {
 
   ngOnInit(): void {
     // Cargar datos desde la API Django
-    this.apollo.watchQuery<any>({
+    this.apollo.use('api2').watchQuery<any>({
       query: GET_ZONAS
     }).valueChanges.subscribe(({ data, error }) => {
       if (error) {
@@ -51,7 +51,7 @@ export class InformacionZonasComponent implements OnInit {
 
   ejecutarConsultas(zona: string) {
     // Ejecutar la primera consulta: GET_PRECIO_M2_POR_ZONA
-    this.apollo
+    this.apollo.use('api2')
       .watchQuery({
         query: GET_PRECIO_M2_POR_ZONA,
         variables: { zona },
@@ -69,7 +69,7 @@ export class InformacionZonasComponent implements OnInit {
       });
 
     // Ejecutar la segunda consulta: GET_PROMEDIO_TIEMPO_POR_ZONA
-    this.apollo
+    this.apollo.use('api2')
       .watchQuery({
         query: GET_PROMEDIO_TIEMPO_POR_ZONA,
         variables: { zona },
@@ -87,7 +87,7 @@ export class InformacionZonasComponent implements OnInit {
       });
 
       // Ejecutar la consulta de propiedades vendidas por zona
-      this.apollo
+      this.apollo.use('api2')
       .watchQuery({
         query: GET_VENDIDOS_POR_ZONA,
         variables: { zona },

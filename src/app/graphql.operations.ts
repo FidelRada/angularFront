@@ -132,4 +132,175 @@ const ADD_VIEW = gql`
   }
 `
 
-export { GET_PROPIEDADES_LOCALIDAD_ZONA, GET_TIEMPO_VENTAS_LOCALIDAD, GET_TASA_CONVERSION_LOCALIDAD, GET_ZONAS, GET_VENDIDOS_POR_ZONA, GET_PRECIO_M2_POR_ZONA, GET_PROMEDIO_TIEMPO_POR_ZONA, GET_VENTAS, CREATE_PROPIEDAD, ADD_DATE_SOLD, ADD_VIEW };
+//LAS PETICIONES GRAPHQL DEL RPE
+
+const GET_ALL_INMUEBLES = gql`
+  query MyQuery {
+  getAllInmuebles {
+    id
+    direccion
+    descripcion
+    superficie
+    tipo
+    valor
+    persona {
+      id
+      nombre
+      apellidoPaterno
+      apellidoMaterno
+      ci
+    }
+  }
+}
+`
+
+const GET_INMUEBLE_BY_ID = gql`
+query MyQuery {
+  getInmuebleById(id: $id){
+    id
+    descripcion
+    direccion
+    superficie
+    tipo
+    valor
+    persona {
+      id
+      ci
+      nombre
+      apellidoPaterno
+      apellidoMaterno
+    }
+  }
+}
+`
+
+const DELETE_INMUEBLE = gql`
+  mutation MyMutation {
+    deleteInmueble(id: $id)
+  }
+`
+
+const UPDATE_INMUEBLE = gql`
+  mutation MyMutation {
+    updateInmueble(
+      id: $id
+      input: $Inmueble
+    ) {
+      descripcion
+      direccion
+      id
+      persona {
+        apellidoMaterno
+        apellidoPaterno
+        ci
+        id
+        nombre
+      }
+      superficie
+      tipo
+      valor
+    }
+  }
+`
+
+const GET_ALL_PERSONAS = gql`
+  query MyQuery {
+  getAllPersonas {
+    apellidoMaterno
+    apellidoPaterno
+    ci
+    nombre
+    id
+    wallet_address_ETH
+  }
+}
+`
+
+const GET_PERSONA_BY_ID = gql`
+ query MyQuery {
+  getPersonaById(id: $id) {
+    ci
+    id
+    nombre
+    apellidoMaterno
+    apellidoPaterno
+    wallet_address_ETH
+  }
+}
+`
+const CREATE_PERSONA = gql`
+  mutation MyMutation($input: PersonaInput!) {
+    addPersona(
+      input: $input
+    ) {
+      id
+      ci
+      nombre
+      apellidoPaterno
+      apellidoMaterno
+      wallet_address_ETH
+    }
+  }
+`;
+
+const UPDATE_PERSONA = gql`
+  mutation UpdatePersona($id: ID!, $input: PersonaInput!) {
+    updatePersona(id: $id, input: $input) {
+      id
+      nombre
+      apellidoPaterno
+      apellidoMaterno
+      ci
+      wallet_address_ETH
+    }
+  }
+`;
+
+const DELTE_PERSONA = gql`
+mutation MyMutation($id: ID!) {
+  deletePersona(id: $id)
+}
+`;
+
+const GET_ALL_ROLES = gql`
+query MyQuery {
+  getAllRole {
+    id
+    name
+  }
+}
+`
+
+const CREATE_USUARIO = gql`
+mutation MyMutation {
+  createUser(input: {
+    password: $password, 
+    personaId: $personaId, 
+    roleIds: $roleId, 
+    username: $username
+    }) {
+    id
+    password
+    persona {
+      nombre
+      id
+      ci
+      apellidoPaterno
+      apellidoMaterno
+    }
+    roles {
+      name
+      id
+    }
+  }
+}
+`
+
+export { GET_PROPIEDADES_LOCALIDAD_ZONA, GET_TIEMPO_VENTAS_LOCALIDAD, GET_TASA_CONVERSION_LOCALIDAD, GET_ZONAS, GET_VENDIDOS_POR_ZONA, GET_PRECIO_M2_POR_ZONA, GET_PROMEDIO_TIEMPO_POR_ZONA, GET_VENTAS, CREATE_PROPIEDAD, ADD_DATE_SOLD, ADD_VIEW,
+
+  GET_ALL_INMUEBLES, GET_INMUEBLE_BY_ID, DELETE_INMUEBLE, UPDATE_INMUEBLE,
+
+  GET_ALL_PERSONAS, GET_PERSONA_BY_ID, UPDATE_PERSONA, DELTE_PERSONA, CREATE_PERSONA, GET_ALL_ROLES,
+
+  CREATE_USUARIO
+ };

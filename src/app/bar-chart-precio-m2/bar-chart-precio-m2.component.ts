@@ -22,7 +22,7 @@ export class BarChartPrecioM2Component implements OnInit {
     google.charts.setOnLoadCallback(() => this.drawChart());
 
     // Cargar datos desde la API Django
-    this.apollo.watchQuery<any>({
+    this.apollo.use('api2').watchQuery<any>({
       query: GET_PROPIEDADES_LOCALIDAD_ZONA
     }).valueChanges.subscribe(({ data, error }) => {
       this.datos = data.calcularPrecioPromedioPorLocalidad;

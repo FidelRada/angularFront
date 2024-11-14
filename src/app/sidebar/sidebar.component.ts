@@ -37,7 +37,22 @@ export class SidebarComponent {
                       label: 'Todos',
                       icon: 'pi pi-search',
                       routerLink: ['/personas']
-                  }
+                  },
+                  /*{
+                      label: 'Clientes',
+                      icon: 'pi pi-search',
+                      routerLink: ['/clientes']
+                  },
+                  {
+                      label: 'Empleados',
+                      icon: 'pi pi-search',
+                      routerLink: ['/empleados']
+                  },
+                  {
+                      label: 'Admins',
+                      icon: 'pi pi-search',
+                      routerLink: ['/admins']
+                  }*/
               ]
           },
           {

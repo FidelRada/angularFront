@@ -7,25 +7,38 @@
     </div>
   
     <div class="p-field">
-      <label for="apellido_paterno" class="p-col-6">Apellido Paterno</label>
-      <input id="apellido_paterno" pInputText formControlName="apellido_paterno" class="p-col-6" />
+      <label for="apellidoPaterno" class="p-col-6">Apellido Paterno</label>
+      <input id="apellidoPaterno" pInputText formControlName="apellidoPaterno" class="p-col-6" />
     </div>
   
     <div class="p-field">
-      <label for="apellido_materno" class="p-col-6">Apellido Materno</label>
-      <input id="apellido_materno" pInputText formControlName="apellido_materno" class="p-col-6" />
+      <label for="apellidoMaterno" class="p-col-6">Apellido Materno</label>
+      <input id="apellidoMaterno" pInputText formControlName="apellidoMaterno" class="p-col-6" />
     </div>
   
     <div class="p-field">
       <label for="ci" class="p-col-6">CI</label>
       <input id="ci" pInputText formControlName="ci" class="p-col-6" />
     </div>
-  
+
+    <!-- Dropdown para Roles -->
     <div class="p-field">
-      <label for="wallet_address_ETH" class="p-col-6">Dirección de Wallet</label>
+      <label for="rol" class="p-col-6">Rol</label>
+      <p-dropdown 
+        id="rol" 
+        [options]="roles" 
+        optionLabel="name" 
+        optionValue="id" 
+        formControlName="rol" 
+        class="p-col-6">
+      </p-dropdown>
+    </div>
+
+    <div class="p-field">
+      <label for="wallet_address_ETH" class="p-col-6">Wallet address ETH</label>
       <input id="wallet_address_ETH" pInputText formControlName="wallet_address_ETH" class="p-col-6" />
     </div>
-  
-    <button pButton type="submit" label="Guardar" [disabled]="personaForm.invalid"></button>
+    
+    <button pButton type="submit" label="Guardar"></button>
   </form>
 </div>
